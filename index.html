@@ -36,7 +36,7 @@
     .rank-badge { background: linear-gradient(135deg, #7928ca, #ff007f); padding: 4px 8px; border-radius: 10px; font-size: 11px; font-weight: 900; color: #ffe600; text-shadow: 1px 1px 2px #000; border: 1px solid #ffe600; }
     .score-badge { font-size: 14px; font-weight: 900; color: #ffe600; }
 
-    /* START SCREEN */
+    /* START SCREEN - FORMULIR DIPERBESAR */
     .start-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #282142 0%, #0b0914 100%); z-index: 9998; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px; text-align: center; overflow-y: auto; }
     .start-title { color: #00f0ff; font-size: 26px; font-weight: 900; margin-bottom: 4px; text-transform: uppercase; text-shadow: 0 0 15px #00f0ff; }
     .start-subtitle { color: #ff007f; font-size: 13px; font-weight: 800; margin-bottom: 14px; text-transform: uppercase; }
@@ -71,7 +71,7 @@
     
     .target-card { background: #161224; border: 2px solid #00f0ff; padding: 12px; border-radius: 16px; text-align: center; width: 100%; max-width: 340px; box-shadow: 0 0 12px rgba(0, 240, 255, 0.2); }
     .target-title { font-size: 12px; color: #ffe600; font-weight: bold; letter-spacing: 1px; margin-bottom: 2px; }
-    .target-note { font-size: 36px; font-weight: 900; color: #ffffff; text-shadow: 0 0 12px #00f0ff; }
+    .target-note { font-size: 38px; font-weight: 900; color: #ffffff; text-shadow: 0 0 12px #00f0ff; }
     .target-freq { font-size: 13px; color: #8a81a8; font-weight: 600; }
     
     .play-sound-btn { margin-top: 6px; background: #282142; border: 2px solid #ff007f; color: #fff; padding: 8px 16px; border-radius: 18px; font-size: 13px; font-weight: bold; cursor: pointer; }
@@ -192,7 +192,7 @@
         <input type="text" id="student-class" placeholder="Contoh: 7.1" autocomplete="off">
       </div>
       <div class="form-group">
-        <label for="student-email">Email Murid (Untuk Kirim Hasil):</label>
+        <label for="student-email">Email Murid (Kirim Hasil):</label>
         <input type="email" id="student-email" placeholder="contoh@gmail.com" autocomplete="off">
       </div>
       <div class="form-group" style="margin-bottom:0;">
@@ -204,9 +204,9 @@
     <div style="background:#161224; border:2px solid #7928ca; padding:10px; border-radius:12px; font-size:12px; margin-bottom:14px; width:100%; max-width:350px; text-align:left;">
       <strong style="color:#ffe600;">CARA BERMAIN (10 SOAL):</strong>
       <ul style="margin-left:16px; margin-top:4px; color:#e2e8f0; line-height:1.4;">
-        <li>Dengarkan nada biola dengan tekan 🔊.</li>
+        <li>Dengarkan nada biola (3 detik) dengan tekan 🔊.</li>
         <li>Tekan <strong>MULAI NYANYI</strong> di bawah.</li>
-        <li>Tahan nada vokal di zona hijau (maksimal 12 detik/soal).</li>
+        <li>Tahan nada di zona hijau (maks. 12 detik/soal)!</li>
       </ul>
     </div>
     <button class="start-btn" onclick="validateAndStart()">MULAI MAIN 🚀</button>
@@ -271,6 +271,7 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNgR5GFpvdCaXzu8xA980qKTvi_kA4ueFtpqLXnuwc9zaI6J0SSafwJlOIrszH_qBs/exec";
 
+    // RENTANG FREKUENSI NADA (100 Hz - 400 Hz)
     const VOCAL_TARGETS = [
       { note: "A2 (La Rendah)", freq: 110.00 },
       { note: "B2 (Si Rendah)", freq: 123.47 },
@@ -290,7 +291,6 @@
 
     const TOTAL_QUESTIONS = 10;
     const TIME_LIMIT_PER_Q = 12.0;
-    const HOLD_TIME_REQ = 1.0;
 
     let examQuestions = [];
     let currentQIndex = 0;
@@ -305,8 +305,9 @@
     let audioCtx = null, micStream = null, analyser = null;
     let isListening = false;
     let holdProgress = 0;
-    let questionTimeLeft = TIME_LIMIT_PER_Q;
+    const HOLD_TIME_REQ = 1.0;
     let lastTime = performance.now();
+    let questionTimeLeft = TIME_LIMIT_PER_Q;
     let timerInterval = null;
 
     function calculateRank(sc) {
@@ -321,8 +322,8 @@
 
     function getAverageAccuracy() {
       if (questionAccuracies.length === 0) return 0;
-      let sum = 0;
-      for (let i = 0; i < questionAccuracies.length; i++) {
+      var sum = 0;
+      for (var i = 0; i < questionAccuracies.length; i++) {
         sum += questionAccuracies[i];
       }
       return Math.round(sum / questionAccuracies.length);
@@ -330,14 +331,14 @@
 
     function updateRankAndScoreUI() {
       currentRank = calculateRank(score);
-      const qNum = Math.min(currentQIndex + 1, TOTAL_QUESTIONS);
+      var qNum = Math.min(currentQIndex + 1, TOTAL_QUESTIONS);
       document.getElementById("question-badge").innerText = "SOAL: " + qNum + "/" + TOTAL_QUESTIONS;
       document.getElementById("score-badge").innerText = "SKOR: " + score;
       document.getElementById("acc-display").innerText = "🎯 Akurasi: " + getAverageAccuracy() + "%";
     }
 
     function generateExamQuestions() {
-      let shuffled = VOCAL_TARGETS.slice().sort(function() { return 0.5 - Math.random(); });
+      var shuffled = VOCAL_TARGETS.slice().sort(function() { return 0.5 - Math.random(); });
       examQuestions = shuffled.slice(0, TOTAL_QUESTIONS);
     }
 
@@ -376,12 +377,12 @@
       if (currentQIndex >= TOTAL_QUESTIONS) {
         finishExam();
       } else {
-        loadQuestion(currentQIndex);
+        pickNextTarget();
       }
     }
 
-    function loadQuestion(idx) {
-      currentTarget = examQuestions[idx];
+    function pickNextTarget() {
+      currentTarget = examQuestions[currentQIndex];
       document.getElementById("target-note").innerText = currentTarget.note;
       document.getElementById("target-freq").innerText = "Frekuensi: " + currentTarget.freq.toFixed(1) + " Hz";
       holdProgress = 0;
@@ -407,14 +408,11 @@
         kirimEmail: sendEmailNow
       };
 
-      // Menggunakan mode no-cors agar Google Apps Script tidak terblokir CORS di browser HP
       fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         body: JSON.stringify(payload)
-      }).catch(function(err) {
-        console.log("Sync background:", err);
-      });
+      }).catch(function(e) {});
     }
 
     function finishExam() {
@@ -425,7 +423,6 @@
       var avgAcc = getAverageAccuracy();
       var finalRank = calculateRank(score);
 
-      // Kirim skor akhir & picu email otomatis ke murid
       sendToSpreadsheet(true);
 
       var modal = document.getElementById("result-modal");
@@ -458,6 +455,7 @@
       modal.style.display = "flex";
     }
 
+    // SUARA BIOLA 3 KETUK / 3 DETIK
     function playTargetSound() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -503,4 +501,163 @@
           source.connect(analyser);
 
           isListening = true;
-          btn.classList.add("recordi
+          btn.classList.add("recording");
+          btn.innerText = "🛑 STOP NYANYI";
+          lastTime = performance.now();
+          processPitch();
+        } catch (err) {
+          alert("Harap izinkan akses Mikrofon di browser HP!");
+        }
+      } else {
+        stopMic();
+      }
+    }
+
+    function stopMic() {
+      isListening = false;
+      if (micStream) micStream.getTracks().forEach(t => t.stop());
+      const btn = document.getElementById("mic-btn");
+      btn.classList.remove("recording");
+      btn.innerText = "🎤 MULAI NYANYI";
+      document.getElementById("pitch-status").innerText = "DIHENTIKAN";
+      document.getElementById("detected-freq").innerText = "Suara Murid: - Hz";
+      document.getElementById("pitch-pointer").style.left = "50%";
+    }
+
+    function autoCorrelate(buf, sampleRate) {
+      let SIZE = buf.length;
+      let rms = 0;
+
+      for (let i = 0; i < SIZE; i++) {
+        let val = buf[i];
+        rms += val * val;
+      }
+      rms = Math.sqrt(rms / SIZE);
+      if (rms < 0.012) return -1;
+
+      let r1 = 0, r2 = SIZE - 1, thres = 0.2;
+      for (let i = 0; i < SIZE / 2; i++) {
+        if (Math.abs(buf[i]) < thres) { r1 = i; break; }
+      }
+      for (let i = 1; i < SIZE / 2; i++) {
+        if (Math.abs(buf[SIZE - i]) < thres) { r2 = SIZE - i; break; }
+      }
+
+      buf = buf.slice(r1, r2);
+      SIZE = buf.length;
+
+      let c = new Array(SIZE).fill(0);
+      for (let i = 0; i < SIZE; i++) {
+        for (let j = 0; j < SIZE - i; j++) {
+          c[i] = c[i] + buf[j] * buf[j + i];
+        }
+      }
+
+      let d = 0;
+      while (c[d] > c[d + 1]) d++;
+      let maxval = -1, maxpos = -1;
+      for (let i = d; i < SIZE; i++) {
+        if (c[i] > maxval) {
+          maxval = c[i];
+          maxpos = i;
+        }
+      }
+
+      let T0 = maxpos;
+      return sampleRate / T0;
+    }
+
+    function processPitch() {
+      if (!isListening || isExamFinished) return;
+
+      const now = performance.now();
+      const dt = (now - lastTime) / 1000;
+      lastTime = now;
+
+      const buf = new Float32Array(2048);
+      analyser.getFloatTimeDomainData(buf);
+      const pitch = autoCorrelate(buf, audioCtx.sampleRate);
+
+      const statusElem = document.getElementById("pitch-status");
+      const freqElem = document.getElementById("detected-freq");
+      const pointerElem = document.getElementById("pitch-pointer");
+
+      if (pitch === -1) {
+        statusElem.innerText = "BERSUARALAH... 🎤";
+        statusElem.style.color = "#ffe600";
+        freqElem.innerText = "Suara Murid: Tidak Terdeteksi";
+        pointerElem.style.left = "50%";
+      } else {
+        freqElem.innerText = "Suara Murid: " + pitch.toFixed(1) + " Hz";
+
+        const cents = 1200 * Math.log2(pitch / currentTarget.freq);
+        const absCents = Math.abs(cents);
+
+        let pointerPercent = 50 + (cents / 2);
+        pointerPercent = Math.max(5, Math.min(95, pointerPercent));
+        pointerElem.style.left = pointerPercent + "%";
+
+        if (absCents <= 40) {
+          statusElem.innerText = "NADA PAS! TAHAN... 🎯";
+          statusElem.style.color = "#10b981";
+
+          holdCentsSamples.push(absCents);
+          holdProgress += (dt / HOLD_TIME_REQ) * 100;
+          if (holdProgress >= 100) {
+            var sumCents = 0;
+            for (var k = 0; k < holdCentsSamples.length; k++) {
+              sumCents += holdCentsSamples[k];
+            }
+            var avgCents = sumCents / holdCentsSamples.length;
+            var qAccuracy = Math.round(100 - (avgCents / 40) * 20);
+            var qPoints = Math.max(8, Math.round(qAccuracy / 10));
+
+            completeCurrentQuestion(qPoints, qAccuracy);
+          }
+        } else if (cents < -40) {
+          statusElem.innerText = "TERLALU RENDAH ⬆️";
+          statusElem.style.color = "#ef4444";
+          holdProgress = Math.max(0, holdProgress - dt * 40);
+        } else {
+          statusElem.innerText = "TERLALU TINGGI ⬇️";
+          statusElem.style.color = "#ef4444";
+          holdProgress = Math.max(0, holdProgress - dt * 40);
+        }
+
+        document.getElementById("progress-fill").style.width = Math.min(100, holdProgress) + "%";
+      }
+
+      requestAnimationFrame(processPitch);
+    }
+
+    function validateAndStart() {
+      var nameInput = document.getElementById("student-name").value.trim();
+      var classInput = document.getElementById("student-class").value.trim();
+      var emailInput = document.getElementById("student-email").value.trim();
+      var waInput = document.getElementById("student-wa").value.trim();
+
+      if (nameInput === "" || classInput === "" || emailInput === "" || waInput === "") {
+        alert("Harap isi Nama Lengkap, Kelas, Email, dan Nomor WhatsApp (08...) terlebih dahulu!");
+        return;
+      }
+
+      if (waInput.indexOf("08") !== 0) {
+        alert("Nomor WhatsApp harus diawali dengan 08 (contoh: 081234567890)!");
+        return;
+      }
+
+      studentName = nameInput;
+      studentClass = classInput;
+      studentEmail = emailInput;
+      studentWA = waInput;
+
+      document.getElementById("display-student").innerText = "Siswa: " + studentName + " (" + studentClass + ")";
+      document.getElementById("start-screen").style.display = "none";
+      
+      generateExamQuestions();
+      pickNextTarget();
+      sendToSpreadsheet(false);
+    }
+  </script>
+</body>
+</html>
