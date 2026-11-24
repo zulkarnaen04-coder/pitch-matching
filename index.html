@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>PA ZU - MLBB VOCAL PITCH EXAM</title>
+  <title>PA ZU - MLBB VOCAL PITCH MATCH</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
     
@@ -21,7 +21,7 @@
     /* HEADER UTAMA */
     .top-header { 
       background: #161224; 
-      height: 52px; 
+      height: 50px; 
       border-bottom: 3px solid #ff007f; 
       display: flex; 
       justify-content: space-between; 
@@ -33,7 +33,7 @@
     }
     .student-badge { font-size: 12px; color: #00f0ff; font-weight: bold; }
     .status-group { display: flex; align-items: center; gap: 6px; }
-    .question-badge { background: #282142; border: 1px solid #00f0ff; color: #00f0ff; padding: 4px 8px; border-radius: 10px; font-size: 11px; font-weight: 900; }
+    .rank-badge { background: linear-gradient(135deg, #7928ca, #ff007f); padding: 4px 8px; border-radius: 10px; font-size: 11px; font-weight: 900; color: #ffe600; text-shadow: 1px 1px 2px #000; border: 1px solid #ffe600; }
     .score-badge { font-size: 14px; font-weight: 900; color: #ffe600; }
 
     /* START SCREEN */
@@ -44,7 +44,7 @@
     .student-form { background: #161224; border: 3px solid #ff007f; padding: 16px; border-radius: 18px; width: 100%; max-width: 350px; margin-bottom: 14px; text-align: left; box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); }
     .form-group { margin-bottom: 10px; }
     .form-group label { display: block; font-size: 13px; color: #ffe600; font-weight: bold; margin-bottom: 4px; }
-    .form-group input { width: 100%; padding: 11px; font-size: 15px; border-radius: 10px; border: 2px solid #7928ca; background: #0b0914; color: #fff; outline: none; }
+    .form-group input { width: 100%; padding: 11px; font-size: 15px; border-radius: 10px; border: 2px solid #7928ca; background: #0b0914; color: #fff; outline: none; user-select: text; }
     
     .start-btn { background: linear-gradient(135deg, #00f0ff, #7928ca); color: #fff; font-size: 17px; font-weight: 900; padding: 14px 28px; border: 2px solid #fff; border-radius: 30px; cursor: pointer; box-shadow: 0 0 18px rgba(0, 240, 255, 0.6); width: 100%; max-width: 350px; text-transform: uppercase; }
 
@@ -55,7 +55,7 @@
       flex-direction: column; 
       justify-content: flex-start; 
       align-items: center; 
-      padding: 10px 15px 95px 15px; 
+      padding: 10px 15px 90px 15px; 
       gap: 10px; 
       overflow-y: auto; 
     }
@@ -68,8 +68,6 @@
       font-size: 12px;
       font-weight: bold;
     }
-    .acc-text { color: #10b981; }
-    .timer-text { color: #ff007f; }
     
     .target-card { background: #161224; border: 2px solid #00f0ff; padding: 12px; border-radius: 16px; text-align: center; width: 100%; max-width: 340px; box-shadow: 0 0 12px rgba(0, 240, 255, 0.2); }
     .target-title { font-size: 12px; color: #ffe600; font-weight: bold; letter-spacing: 1px; margin-bottom: 2px; }
@@ -94,18 +92,18 @@
     .progress-bg { width: 100%; height: 12px; background: #0b0914; border-radius: 6px; overflow: hidden; }
     .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #00f0ff); transition: width 0.1s linear; }
 
-    /* CONTROLS DI BAWAH LAYAR */
+    /* CONTROLS DIKUNCI DI BAWAH LAYAR */
     .controls { 
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 10px 12px 14px 12px; 
+      padding: 10px 15px 15px 15px; 
       background: #161224; 
       border-top: 2px solid #7928ca; 
       display: flex; 
-      justify-content: center;
-      gap: 8px; 
+      justify-content: center; 
+      gap: 8px;
       z-index: 100;
       box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.6);
     }
@@ -114,16 +112,18 @@
       background: linear-gradient(135deg, #10b981, #059669); 
       color: #fff; 
       border: 2px solid #fff; 
-      font-size: 14px; 
+      font-size: 15px; 
       font-weight: 900; 
-      padding: 12px 10px; 
+      padding: 12px 14px; 
       border-radius: 25px; 
       cursor: pointer; 
-      max-width: 210px; 
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4); 
+      max-width: 220px; 
       text-transform: uppercase; 
     }
     .mic-btn.recording { 
       background: linear-gradient(135deg, #ef4444, #dc2626) !important; 
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.6) !important; 
     }
     .skip-btn {
       flex: 1;
@@ -135,7 +135,7 @@
       padding: 12px 10px;
       border-radius: 25px;
       cursor: pointer;
-      max-width: 130px;
+      max-width: 110px;
       text-transform: uppercase;
     }
 
@@ -159,7 +159,6 @@
       padding: 22px;
       width: 100%;
       max-width: 350px;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
     }
     .wa-btn {
       display: block;
@@ -180,8 +179,8 @@
 
   <!-- START SCREEN -->
   <div class="start-screen" id="start-screen">
-    <div class="start-title">PA ZU - MODE UJIAN</div>
-    <div class="start-subtitle">🎤 10 NADA VOKAL & AKURASI 🎤</div>
+    <div class="start-title">PA ZU</div>
+    <div class="start-subtitle">🎤 MLBB VOCAL PITCH MATCH 🎤</div>
     
     <div class="student-form">
       <div class="form-group">
@@ -197,42 +196,43 @@
         <input type="email" id="student-email" placeholder="contoh@gmail.com" autocomplete="off">
       </div>
       <div class="form-group" style="margin-bottom:0;">
-        <label for="student-wa">Nomor WhatsApp (Awali 62):</label>
-        <input type="tel" id="student-wa" placeholder="Contoh: 6281234567890" autocomplete="off">
+        <label for="student-wa">Nomor WhatsApp (Awali 08):</label>
+        <input type="tel" id="student-wa" placeholder="Contoh: 081234567890" autocomplete="off">
       </div>
     </div>
 
-    <div style="background:#161224; border:2px solid #7928ca; padding:10px 14px; border-radius:12px; font-size:12px; margin-bottom:14px; width:100%; max-width:350px; text-align:left; color:#e2e8f0;">
-      <strong style="color:#ffe600;">ATURAN UJIAN (10 SOAL):</strong><br>
-      • Setiap nada diberi waktu maksimal <strong>12 detik</strong>.<br>
-      • Tahan nada di tengah zona hijau untuk <strong>Akurasi 100%</strong>.<br>
-      • Nilai & Peringkat otomatis dikirim setelah soal ke-10 selesai.
+    <div style="background:#161224; border:2px solid #7928ca; padding:10px; border-radius:12px; font-size:12px; margin-bottom:14px; width:100%; max-width:350px; text-align:left;">
+      <strong style="color:#ffe600;">CARA BERMAIN (10 SOAL):</strong>
+      <ul style="margin-left:16px; margin-top:4px; color:#e2e8f0; line-height:1.4;">
+        <li>Dengarkan nada biola dengan tekan 🔊.</li>
+        <li>Tekan <strong>MULAI NYANYI</strong> di bawah.</li>
+        <li>Tahan nada vokal di zona hijau (maksimal 12 detik/soal).</li>
+      </ul>
     </div>
-
-    <button class="start-btn" onclick="validateAndStart()">MULAI UJIAN 🚀</button>
+    <button class="start-btn" onclick="validateAndStart()">MULAI MAIN 🚀</button>
   </div>
 
   <!-- TOP HEADER -->
   <div class="top-header">
     <div class="student-badge" id="display-student">Siswa: -</div>
     <div class="status-group">
-      <div class="question-badge" id="question-badge">SOAL: 1/10</div>
-      <div class="score-badge" id="score-badge">NILAI: 0</div>
+      <div class="rank-badge" id="question-badge">SOAL: 1/10</div>
+      <div class="score-badge" id="score-badge">SKOR: 0</div>
     </div>
   </div>
 
   <!-- ARENA NYANYI -->
   <div class="arena">
     <div class="info-bar">
-      <span class="acc-text" id="acc-display">🎯 Akurasi Rata-rata: 0%</span>
-      <span class="timer-text" id="timer-display">⏱️ Waktu: 12.0s</span>
+      <span style="color:#10b981;" id="acc-display">🎯 Akurasi: 0%</span>
+      <span style="color:#ff007f;" id="timer-display">⏱️ Waktu: 12.0s</span>
     </div>
 
     <div class="target-card">
-      <div class="target-title">NADA TARGET UJIAN</div>
+      <div class="target-title">NADA TARGET SANTAI (SMP)</div>
       <div class="target-note" id="target-note">A3</div>
       <div class="target-freq" id="target-freq">Frekuensi: 220.0 Hz</div>
-      <button class="play-sound-btn" onclick="playTargetSound()">🔊 DENGARKAN NADA BIOLA</button>
+      <button class="play-sound-btn" onclick="playTargetSound()">🔊 DENGARKAN SUARA BIOLA</button>
     </div>
 
     <div class="pitch-container">
@@ -252,16 +252,16 @@
     </div>
   </div>
 
-  <!-- CONTROLS DI BAWAH LAYAR -->
+  <!-- CONTROLS DIKUNCI DI PALING BAWAH LAYAR -->
   <div class="controls">
     <button class="mic-btn" id="mic-btn" onclick="toggleMic()">🎤 MULAI NYANYI</button>
-    <button class="skip-btn" id="skip-btn" onclick="skipQuestion()">⏭️ LEWATI</button>
+    <button class="skip-btn" onclick="skipQuestion()">⏭️ LEWATI</button>
   </div>
 
-  <!-- MODAL HASIL AKHIR (TERKUNCI SETELAH 10 SOAL) -->
+  <!-- MODAL HASIL AKHIR -->
   <div class="result-modal" id="result-modal">
     <div class="result-card">
-      <div style="color:#00f0ff; font-size:20px; font-weight:900; margin-bottom:8px;">🏁 UJIAN SELESAI!</div>
+      <div style="color:#00f0ff; font-size:20px; font-weight:900; margin-bottom:8px;">🏁 PERMAINAN SELESAI!</div>
       <div id="result-summary" style="color:#e2e8f0; font-size:14px; line-height:1.6; text-align:left; background:#0b0914; padding:12px; border-radius:12px; border:1px solid #7928ca;"></div>
       <div id="email-notif" style="font-size:12px; color:#10b981; margin-top:10px; font-weight:bold;"></div>
       <a id="wa-share-link" class="wa-btn" href="#" target="_blank">📲 KIRIM HASIL KE WHATSAPP</a>
@@ -289,30 +289,25 @@
     ];
 
     const TOTAL_QUESTIONS = 10;
-    const TIME_LIMIT_PER_Q = 12.0; // Maksimal 12 detik per soal
+    const TIME_LIMIT_PER_Q = 12.0;
     const HOLD_TIME_REQ = 1.0;
 
     let examQuestions = [];
     let currentQIndex = 0;
     let currentTarget = VOCAL_TARGETS[7];
-    let totalScore = 0;
-    let questionAccuracies = []; // Menyimpan % akurasi tiap soal (0 - 100)
-    let holdCentsSamples = [];   // Menyimpan selisih cents saat menahan nada
+    let score = 0, currentRank = "UNRANKED";
+    let questionAccuracies = [];
+    let holdCentsSamples = [];
     let isExamFinished = false;
 
     let studentName = "", studentClass = "", studentEmail = "", studentWA = "";
+    
     let audioCtx = null, micStream = null, analyser = null;
     let isListening = false;
     let holdProgress = 0;
     let questionTimeLeft = TIME_LIMIT_PER_Q;
     let lastTime = performance.now();
     let timerInterval = null;
-
-    // Acak 10 soal unik untuk ujian
-    function generateExamQuestions() {
-      let shuffled = [...VOCAL_TARGETS].sort(() => 0.5 - Math.random());
-      examQuestions = shuffled.slice(0, TOTAL_QUESTIONS);
-    }
 
     function calculateRank(sc) {
       if (sc < 40) return "WARRIOR ⚔️";
@@ -326,32 +321,40 @@
 
     function getAverageAccuracy() {
       if (questionAccuracies.length === 0) return 0;
-      const sum = questionAccuracies.reduce((a, b) => a + b, 0);
+      let sum = 0;
+      for (let i = 0; i < questionAccuracies.length; i++) {
+        sum += questionAccuracies[i];
+      }
       return Math.round(sum / questionAccuracies.length);
     }
 
-    function updateHeaderUI() {
+    function updateRankAndScoreUI() {
+      currentRank = calculateRank(score);
       const qNum = Math.min(currentQIndex + 1, TOTAL_QUESTIONS);
-      document.getElementById("question-badge").innerText = `SOAL: ${qNum}/${TOTAL_QUESTIONS}`;
-      document.getElementById("score-badge").innerText = `NILAI: ${totalScore}`;
-      document.getElementById("acc-display").innerText = `🎯 Akurasi Rata-rata: ${getAverageAccuracy()}%`;
+      document.getElementById("question-badge").innerText = "SOAL: " + qNum + "/" + TOTAL_QUESTIONS;
+      document.getElementById("score-badge").innerText = "SKOR: " + score;
+      document.getElementById("acc-display").innerText = "🎯 Akurasi: " + getAverageAccuracy() + "%";
     }
 
-    // Mulai timer 12 detik per soal
+    function generateExamQuestions() {
+      let shuffled = VOCAL_TARGETS.slice().sort(function() { return 0.5 - Math.random(); });
+      examQuestions = shuffled.slice(0, TOTAL_QUESTIONS);
+    }
+
     function startQuestionTimer() {
       clearInterval(timerInterval);
       questionTimeLeft = TIME_LIMIT_PER_Q;
-      document.getElementById("timer-display").innerText = `⏱️ Waktu: ${questionTimeLeft.toFixed(1)}s`;
+      document.getElementById("timer-display").innerText = "⏱️ Waktu: " + questionTimeLeft.toFixed(1) + "s";
 
-      timerInterval = setInterval(() => {
+      timerInterval = setInterval(function() {
         if (isExamFinished) return;
         questionTimeLeft -= 0.1;
         if (questionTimeLeft <= 0) {
           questionTimeLeft = 0;
-          document.getElementById("timer-display").innerText = `⏱️ Waktu Habis!`;
-          completeCurrentQuestion(0, 0); // Waktu habis = 0 poin, 0% akurasi
+          document.getElementById("timer-display").innerText = "⏱️ Waktu Habis!";
+          completeCurrentQuestion(0, 0);
         } else {
-          document.getElementById("timer-display").innerText = `⏱️ Waktu: ${questionTimeLeft.toFixed(1)}s`;
+          document.getElementById("timer-display").innerText = "⏱️ Waktu: " + questionTimeLeft.toFixed(1) + "s";
         }
       }, 100);
     }
@@ -361,16 +364,14 @@
       completeCurrentQuestion(0, 0);
     }
 
-    // Menyelesaikan 1 soal dan lanjut ke soal berikutnya / selesai ujian
     function completeCurrentQuestion(earnedPoints, earnedAccuracy) {
       clearInterval(timerInterval);
-      totalScore += earnedPoints;
+      score += earnedPoints;
       questionAccuracies.push(earnedAccuracy);
       currentQIndex++;
-      updateHeaderUI();
+      updateRankAndScoreUI();
 
-      // Kirim progress real-time ke spreadsheet guru
-      syncToGoogleSheet(false);
+      sendToSpreadsheet(false);
 
       if (currentQIndex >= TOTAL_QUESTIONS) {
         finishExam();
@@ -386,77 +387,75 @@
       holdProgress = 0;
       holdCentsSamples = [];
       document.getElementById("progress-fill").style.width = "0%";
-      updateHeaderUI();
+      updateRankAndScoreUI();
       playTargetSound();
       startQuestionTimer();
     }
 
-    async function syncToGoogleSheet(sendEmailNow = false) {
-      const avgAcc = getAverageAccuracy();
-      const rankTier = calculateRank(totalScore);
+    function sendToSpreadsheet(sendEmailNow) {
+      var avgAcc = getAverageAccuracy();
+      var rankTier = calculateRank(score);
 
-      const payload = {
+      var payload = {
         nama: studentName,
         kelas: studentClass,
         email: studentEmail,
         wa: studentWA,
-        skor: totalScore,
+        skor: score,
         akurasi: avgAcc,
         rank: rankTier,
         kirimEmail: sendEmailNow
       };
 
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: "POST",
-          body: JSON.stringify(payload)
-        });
-        return await response.json();
-      } catch (err) {
-        return null;
-      }
+      // Menggunakan mode no-cors agar Google Apps Script tidak terblokir CORS di browser HP
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(payload)
+      }).catch(function(err) {
+        console.log("Sync background:", err);
+      });
     }
 
-    async function finishExam() {
+    function finishExam() {
       isExamFinished = true;
       clearInterval(timerInterval);
       if (isListening) stopMic();
 
-      const modal = document.getElementById("result-modal");
-      const summary = document.getElementById("result-summary");
-      const emailNotif = document.getElementById("email-notif");
-      const waLink = document.getElementById("wa-share-link");
+      var avgAcc = getAverageAccuracy();
+      var finalRank = calculateRank(score);
 
-      summary.innerHTML = "⏳ Sedang menghitung peringkat & mengirim hasil...";
+      // Kirim skor akhir & picu email otomatis ke murid
+      sendToSpreadsheet(true);
+
+      var modal = document.getElementById("result-modal");
+      var summary = document.getElementById("result-summary");
+      var emailNotif = document.getElementById("email-notif");
+      var waLink = document.getElementById("wa-share-link");
+
+      summary.innerHTML = 
+        "<strong>Nama:</strong> " + studentName + " (" + studentClass + ")<br>" +
+        "<strong>Nilai Akhir:</strong> " + score + " / 100<br>" +
+        "<strong>Akurasi Rata-rata:</strong> " + avgAcc + "%<br>" +
+        "<strong>Tier Rank:</strong> " + finalRank + "<br>" +
+        "<strong>Status:</strong> Tersimpan di Spreadsheet Guru";
+
+      emailNotif.innerText = "✅ Hasil otomatis dikirim ke Email: " + studentEmail;
+
+      var pesanWA = "*HASIL VOCAL PITCH MATCH (PA ZU)*%0A%0A" +
+                    "Nama: *" + studentName + "*%0A" +
+                    "Kelas: *" + studentClass + "*%0A" +
+                    "Nilai Akhir: *" + score + " / 100*%0A" +
+                    "Akurasi Nada: *" + avgAcc + "%*%0A" +
+                    "Rank: *" + finalRank + "*";
+
+      var cleanWA = studentWA.replace(/[^0-9]/g, '');
+      if (cleanWA.indexOf('0') === 0) {
+        cleanWA = '62' + cleanWA.substring(1);
+      }
+
+      waLink.href = "https://wa.me/" + cleanWA + "?text=" + pesanWA;
       modal.style.display = "flex";
-
-      const avgAcc = getAverageAccuracy();
-      const finalRank = calculateRank(totalScore);
-      const result = await syncToGoogleSheet(true);
-      const rankPosText = result ? `#${result.posisi} dari ${result.totalSiswa} siswa` : "Tercatat di Spreadsheet";
-
-      summary.innerHTML = `
-        <strong>Nama:</strong> ${studentName} (${studentClass})<br>
-        <strong>Nilai Akhir:</strong> ${totalScore} / 100<br>
-        <strong>Akurasi Rata-rata:</strong> ${avgAcc}%<br>
-        <strong>Tier Rank:</strong> ${finalRank}<br>
-        <strong>Peringkat Kelas:</strong> ${rankPosText}
-      `;
-
-      emailNotif.innerText = "✅ Nilai & sertifikat ringkas telah dikirim ke: " + studentEmail;
-
-      const pesanWA = `*HASIL UJIAN VOCAL PITCH MATCH (PA ZU)*%0A%0A` +
-                      `Nama: *${studentName}*%0A` +
-                      `Kelas: *${studentClass}*%0A` +
-                      `Nilai Akhir: *${totalScore} / 100*%0A` +
-                      `Akurasi Nada: *${avgAcc}%*%0A` +
-                      `Rank: *${finalRank}*%0A` +
-                      `Peringkat Kelas: *${rankPosText}*`;
-
-      let cleanWA = studentWA.replace(/[^0-9]/g, '');
-      if (cleanWA.startsWith('0')) cleanWA = '62' + cleanWA.substring(1);
-
-      waLink.href = `https://wa.me/${cleanWA}?text=${pesanWA}`;
     }
 
     function playTargetSound() {
@@ -476,17 +475,17 @@
       lfoGain.gain.setValueAtTime(3.0, startTime);
       lfo.connect(osc.frequency);
       lfo.start(startTime);
-      lfo.stop(startTime + 2.5);
+      lfo.stop(startTime + 3.0);
 
       gain.gain.setValueAtTime(0.001, startTime);
       gain.gain.linearRampToValueAtTime(0.25, startTime + 0.2);
-      gain.gain.setValueAtTime(0.25, startTime + 2.0);
-      gain.gain.exponentialRampToValueAtTime(0.001, startTime + 2.5);
+      gain.gain.setValueAtTime(0.25, startTime + 2.5);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + 3.0);
 
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start(startTime);
-      osc.stop(startTime + 2.5);
+      osc.stop(startTime + 3.0);
     }
 
     async function toggleMic() {
@@ -497,4 +496,11 @@
           if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           if (audioCtx.state === 'suspended') await audioCtx.resume();
 
-          micStream = await navigator.mediaDevices.getUserMedia({ audio: true
+          micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const source = audioCtx.createMediaStreamSource(micStream);
+          analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 2048;
+          source.connect(analyser);
+
+          isListening = true;
+          btn.classList.add("recordi
